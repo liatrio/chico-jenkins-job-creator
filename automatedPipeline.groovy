@@ -146,6 +146,7 @@ def createBuildJob(component) {
               goals("clean install")
 
             postBuildSteps('SUCCESS') {
+              shell("scp -i /var/lib/jenkins/.ssh/id_rsa -o StrictHostKeyChecking=no /target/gameoflife-web-1.0-SNAPSHOT.war tomcat-deploy@ip-172-31-26-108.us-west-2.compute.internal:/var/lib/tomcat8/webapps/${component.scmProject}")
               //if( downStreamJobs && branchName == "master" ) {
                 //downstreamParameterized {
                   //trigger(downStreamJobs.join(", "))
