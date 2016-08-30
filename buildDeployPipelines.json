@@ -1,7 +1,7 @@
 {
  "components": [
    {
-      "scmProject": "liatrio",
+      "scmProject": "mikewootini",
       "productName": "game-of-life",
       "branchName": "master",
       "deploymentDirectory": "demo"
