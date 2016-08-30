@@ -2,15 +2,9 @@
  "components": [
    {
       "scmProject": "liatrio",
-      "productName": "Hygieia",
-      "deploymentEnvironments": ["dev"],
-      "ciEnvironments": ["dev"]
-   },
-   {
-      "scmProject": "liatrio",
-      "productName": "theia-ui",
-      "deploymentEnvironments": ["dev"],
-      "ciEnvironments": ["dev"]
+      "productName": "game-of-life",
+      "branchName": "master",
+      "deploymentDirectory": "demo"
    }
  ]
 }

@@ -79,7 +79,7 @@ def createFolders(project, product)
     def createProjectFolder = folder(project)
     def createProductFolder = folder(productPath)
     def createProductBuildsFolder = folder(productPath + "/builds")
-    def createProductDeploymentsFolder = folder(productPath + "/deployments")
+    //def createProductDeploymentsFolder = folder(productPath + "/deployments")
   }
   catch (Exception exception) {
     return false
@@ -113,56 +113,13 @@ def createDeployJobName(projectName, productName , environment) {
   return (projectName + "-" + productName +"-deploy-" + environment).toLowerCase()
 }
 
-def getBranches(branchApi) {
-  def auth = GIT_AUTH_TOKEN
-  def json = new JsonSlurper()
-
-  if (auth.size() > 20) //Just looking for something that looks real
-  {
-    out.println("The git auth token was provided.  Using it...")
-    try {
-      return json.parse(branchApi.toURL().newReader(requestProperties: ["Authorization": "token ${auth}".toString(), "Accept": "application/json"]))
-    }
-    catch (Exception ex) {
-      out.println(ex)
-      return null //API request failed
-    }
-  }
-  else
-  {
-    try {
-      return json.parse(branchApi.toURL().newReader())
-    }
-    catch (Exception ex) {
-      out.println(ex)
-      out.println("Auth likely failed - Provide an api key if repository is private.")
-      return null //API request failed
-    }
-  }
-}
 
 def createBuildJob(component) {
   String productPath = component.scmProject + "/" + component.productName
   String branchApi =  GIT_API + productPath + "/branches"
   String repoUrl = GIT_URL + productPath
 
-  def ciEnvironments = component.ciEnvironments
-  def downStreamJobs = []
-
-  for(env in ciEnvironments) {
-    if (USE_FOLDERS) {
-      downStreamJobs.add("../deployments/" + createDeployJobName(component.scmProject, component.productName, env))
-    }
-    else {
-      downStreamJobs.add(createDeployJobName(component.scmProject, component.productName, env))
-    }
-  }
-
-  def branches = getBranches(branchApi)
-  if (branches)
-  {
-    branches.each {
-        def branchName = it.name
+        def branchName = "${component.branchName}"
         def jobName = "${component.scmProject}-${component.productName}-${branchName}-build".replaceAll('/','-').toLowerCase()
         def jobLocation = ""
         if (USE_FOLDERS) {
@@ -189,14 +146,12 @@ def createBuildJob(component) {
               goals("clean install")
 
             postBuildSteps('SUCCESS') {
-              if( downStreamJobs && branchName == "master" ) {
-                downstreamParameterized {
-                  trigger(downStreamJobs.join(", "))
-                }
-              }
+              //if( downStreamJobs && branchName == "master" ) {
+                //downstreamParameterized {
+                  //trigger(downStreamJobs.join(", "))
+                //}
+              //}
             }
-          }
       return jobName
     }
   }
-}
