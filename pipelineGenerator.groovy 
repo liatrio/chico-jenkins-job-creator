@@ -1,0 +1,51 @@
+import java.io.FileReader
+import java.nio.file.*
+
+
+def gitUserNames = ['stein321','liatrio']
+def commands =
+'''
+node {
+    stage "Checkout"
+    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/liatrio/game-of-life.git']]])
+
+    stage "Build"
+    def mvnHome = tool 'Maven 3'
+    sh "${mvnHome}/bin/mvn -B verify"
+
+    stage "deploy"
+    echo "scp somewhere"
+}
+'''
+
+
+
+
+
+gitUserNames.each {
+    commands = commands.replaceAll("liatrio",it)
+    pipelineJob(it + '-game-of-life-pipeline') {
+        definition {
+            cps {
+                script(commands)
+                sandbox()
+            }
+        }
+    }
+    def jobName = it + '-game-of-life-build-deploy'
+    def newFileName = it + "-gameoflife-web-1.0-SNAPSHOT.war"
+    def gitRepo = 'https://github.com/' + it + '/game-of-life.git'
+    mavenJob(jobName) {
+        scm {
+            git(gitRepo, 'master')
+        }
+        triggers {
+          scm('H/2 * * * *')
+        }
+        goals('clean install')
+        postBuildSteps('SUCCESS') {
+            shell("mv /target/gameoflife-web-1.0-SNAPSHOT.war " + newFileName )
+            shell("scp " + newFileName)
+        }
+    }
+}
