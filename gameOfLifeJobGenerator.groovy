@@ -22,7 +22,10 @@ gitUserNames.each {
     def deployJobName = it + '-game-of-life-deploy'
     mavenJob(buildJobName) {
         scm {
-            git(gitRepo, 'master')
+            git(gitRepo, 'master') {
+                createTag(false)
+            }
+
         }
         triggers {
           scm('H/2 * * * *')
