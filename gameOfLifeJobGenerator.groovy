@@ -4,11 +4,12 @@ import java.nio.file.*
 
 /*
 Plugins Required:
+
 Job DSL
 Groovy
 Git plugin
 Build Pipeline Plugin
-Copy Artifact Plugin
+Copyartifact
 
 */
 
