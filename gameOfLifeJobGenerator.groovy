@@ -2,7 +2,17 @@ import java.io.FileReader
 import java.nio.file.*
 
 
-def gitUserNames = ['stein321','liatrio','chrisBlackburn']
+/*
+Plugins Required:
+Job DSL
+Groovy
+Git plugin
+Build Pipeline Plugin
+Copy Artifact Plugin
+
+*/
+
+def gitUserNames = ['stein321','liatrio']
 
 gitUserNames.each {
     def buildJobName = it + '-game-of-life-build'
