@@ -35,7 +35,8 @@ gitUserNames.each {
             buildPipelineTrigger(deployJobName)
         }
     }
-    def shellCommand = "mv gameoflife.war " + newFileName
+    def renameFile = "mv gameoflife.war " + newFileName
+    def scpCommand = "scp -i /var/lib/jenkins/.ssh/id_rsa -o StrictHostKeyChecking=no " + newFileName + " tomcat-deploy@ip-172-31-26-108.us-west-2.compute.internal:/var/lib/tomcat8/webapps/liatrio"
     job(deployJobName){
         //copy artifact
         steps {
@@ -46,7 +47,7 @@ gitUserNames.each {
                 includePatterns('gameoflife-web/target/*')
                 flatten()
             }
-            shell(shellCommand)
+            shell(renameFile + "\n" + )
         }
         //rename
         //scp
