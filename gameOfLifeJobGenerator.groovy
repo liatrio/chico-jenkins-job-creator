@@ -31,7 +31,7 @@ gitUserNames.each {
           scm('H/2 * * * *')
         }
         goals('clean install')
-        publishers {
+        publishers(SUCCESS) {
             buildPipelineTrigger(deployJobName)
         }
     }
