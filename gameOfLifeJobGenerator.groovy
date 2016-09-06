@@ -66,3 +66,44 @@ gitUserNames.each {
         refreshFrequency(60)
     }
 }
+
+
+
+sectionedView('example') {
+    sections {
+        listView {
+            name('project-A')
+            width('HALF')
+            alignment('LEFT')
+            jobs {
+                regex('.*-game-of-life-build')
+            }
+            columns {
+                status()
+                weather()
+                name()
+                lastSuccess()
+                lastFailure()
+            }
+        }
+    }
+}
+sectionedView('example2') {
+    sections {
+        listView {
+            name('project-A')
+            width('HALF')
+            alignment('LEFT')
+            jobs {
+                regex('.*-game-of-life-deploy')
+            }
+            columns {
+                status()
+                weather()
+                name()
+                lastSuccess()
+                lastFailure()
+            }
+        }
+    }
+}
