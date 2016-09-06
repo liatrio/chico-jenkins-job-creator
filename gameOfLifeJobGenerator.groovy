@@ -74,11 +74,6 @@ listView('Build Jobs') {
 
         regex(/.+-game-of-life-build/)
     }
-    jobFilters {
-        status {
-            status(Status.UNSTABLE)
-        }
-    }
     columns {
         status()
         weather()
