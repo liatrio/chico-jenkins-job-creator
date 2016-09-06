@@ -21,6 +21,7 @@ gitUserNames.each {
     def gitRepo = 'https://github.com/' + it + '/game-of-life.git'
     def deployJobName = it + '-game-of-life-deploy'
     def clickAbleUrl = "http://tomcat.chico.liatr.io/" + newFileName.split("\\.")[0]
+    def clickableUrlLink = "echo SUCCESS! Your app has been deploy to: " +  clickAbleUrl
     mavenJob(buildJobName) {
         scm {
             git(gitRepo, 'master') {
