@@ -66,28 +66,6 @@ gitUserNames.each {
         refreshFrequency(60)
     }
 }
-
-
-
-sectionedView('example') {
-    sections {
-        listView {
-            name('project-A')
-            width('HALF')
-            alignment('LEFT')
-            jobs {
-                regex('.*-game-of-life-build')
-            }
-            columns {
-                status()
-                weather()
-                name()
-                lastSuccess()
-                lastFailure()
-            }
-        }
-    }
-}
 listView('Build Jobs') {
     description('All unstable jobs for project A')
     filterBuildQueue()
