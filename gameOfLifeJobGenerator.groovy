@@ -67,12 +67,30 @@ gitUserNames.each {
     }
 }
 listView('Build Jobs') {
-    description('All unstable jobs for project A')
+    description('Build jobs')
     filterBuildQueue()
     filterExecutors()
     jobs {
 
         regex(/.+-game-of-life-build/)
+    }
+    columns {
+        status()
+        weather()
+        name()
+        lastSuccess()
+        lastFailure()
+        lastDuration()
+        buildButton()
+    }
+}
+listView('Deploy Jobs') {
+    description('Deploy jobs')
+    filterBuildQueue()
+    filterExecutors()
+    jobs {
+
+        regex(/.+-game-of-life-deploy/)
     }
     columns {
         status()
