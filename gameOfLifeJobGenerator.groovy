@@ -88,22 +88,26 @@ sectionedView('example') {
         }
     }
 }
-sectionedView('example2') {
-    sections {
-        listView {
-            name('project-A')
-            width('HALF')
-            alignment('LEFT')
-            jobs {
-                regex('.*-game-of-life-deploy')
-            }
-            columns {
-                status()
-                weather()
-                name()
-                lastSuccess()
-                lastFailure()
-            }
+listView('Build Jobs') {
+    description('All unstable jobs for project A')
+    filterBuildQueue()
+    filterExecutors()
+    jobs {
+
+        regex(/.+-game-of-life-build/)
+    }
+    jobFilters {
+        status {
+            status(Status.UNSTABLE)
         }
+    }
+    columns {
+        status()
+        weather()
+        name()
+        lastSuccess()
+        lastFailure()
+        lastDuration()
+        buildButton()
     }
 }
