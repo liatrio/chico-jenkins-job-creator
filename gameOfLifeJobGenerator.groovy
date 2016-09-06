@@ -48,7 +48,7 @@ gitUserNames.each {
                 includePatterns('gameoflife-web/target/*')
                 flatten()
             }
-            shell(renameFile + "\n" + scpCommand + "\n" + clickAbleUrl)
+            shell(renameFile + "\n" + scpCommand + "\n" +  "echo " +  clickAbleUrl)
 
         }
         //rename
