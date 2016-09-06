@@ -30,7 +30,7 @@ gitUserNames.each {
 
         }
         triggers {
-          scm('* * * * *')
+          scm('H/2 * * * *')
         }
         goals('clean install')
         publishers{
