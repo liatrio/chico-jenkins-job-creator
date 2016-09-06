@@ -20,6 +20,7 @@ gitUserNames.each {
     def newFileName = it + "-gameoflife.war"
     def gitRepo = 'https://github.com/' + it + '/game-of-life.git'
     def deployJobName = it + '-game-of-life-deploy'
+    def clickAbleUrl = "http://tomcat.chico.liatr.io/" + newFileName.split("\\.")[0]
     mavenJob(buildJobName) {
         scm {
             git(gitRepo, 'master') {
@@ -47,7 +48,8 @@ gitUserNames.each {
                 includePatterns('gameoflife-web/target/*')
                 flatten()
             }
-            shell(renameFile + "\n" + scpCommand)
+            shell(renameFile + "\n" + scpCommand + "\n" + clickAbleUrl)
+
         }
         //rename
         //scp
