@@ -17,7 +17,7 @@ def gitUserNames = ['stein321','liatrio']
 
 gitUserNames.each {
     def buildJobName = it + '-game-of-life-build'
-    def newFileName = it + "-gameoflife-web-1.0-SNAPSHOT.war"
+    def newFileName = it + "-gameoflife.war"
     def gitRepo = 'https://github.com/' + it + '/game-of-life.git'
     def deployJobName = it + '-game-of-life-deploy'
     mavenJob(buildJobName) {
