@@ -13,7 +13,7 @@ Copyartifact
 
 */
 
-def gitUserNames = ['liatrio','chrisjblackburn','sampsonbryce','tysonhenry','shanemacbride','HunterMayers','ravikalaga','adamjenkins1','pchordia','sbendick']
+def gitUserNames = ['liatrio','chrisjblackburn','sampsonbryce','tysonhenry','shanemacbride','HunterMayers','ravikalaga','adamjenkins1','pchordia','sbendick','Mathewpdias']
 
 gitUserNames.each {
     def buildJobName = it + '-game-of-life-build'
